@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Волонтёрский дневник — Движение Первых, Орловская область</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg1:#fff;--bg2:#f5f4f0;--bg3:#eceae4;--t1:#1a1a18;--t2:#5f5e5a;--t3:#888780;--bdr:rgba(0,0,0,.12);--bdr2:rgba(0,0,0,.22);--sbg:#eaf3de;--stxt:#3b6d11;--ibg:#e6f1fb;--itxt:#185fa5;--wbg:#faeeda;--wtxt:#633806;--r:8px;--rl:12px}
+@media(prefers-color-scheme:dark){:root{--bg1:#1e1e1c;--bg2:#262624;--bg3:#2e2e2b;--t1:#e8e6df;--t2:#9c9a92;--t3:#6a6860;--bdr:rgba(255,255,255,.1);--bdr2:rgba(255,255,255,.2);--sbg:#173404;--stxt:#97c459;--ibg:#042c53;--itxt:#85b7eb;--wbg:#412402;--wtxt:#fac775}}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg3);color:var(--t1);min-height:100vh}
+.app{max-width:720px;margin:0 auto;padding:16px}
+.hdr{margin-bottom:20px;padding-bottom:16px;border-bottom:.5px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.hdr-t{font-size:16px;font-weight:500}
+.hdr-s{font-size:12px;color:var(--t2);margin-top:2px}
+.tabs{display:flex;gap:2px;margin-bottom:16px;background:var(--bg2);border-radius:var(--r);padding:4px}
+.tab{flex:1;padding:7px 4px;font-size:12px;text-align:center;cursor:pointer;border:none;background:none;color:var(--t2);border-radius:6px}
+.tab.active{background:var(--bg1);color:var(--t1);font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.panel{display:none}.panel.active{display:block}
+.card{background:var(--bg1);border:.5px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;margin-bottom:10px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.metric{background:var(--bg2);border-radius:var(--r);padding:12px;text-align:center}
+.mn{font-size:26px;font-weight:500}
+.ml{font-size:12px;color:var(--t2);margin-top:2px}
+label{font-size:13px;color:var(--t2);display:block;margin-bottom:4px}
+input,select{width:100%;font-size:13px;padding:8px 10px;border:.5px solid var(--bdr2);border-radius:var(--r);background:var(--bg1);color:var(--t1);outline:none}
+input:focus,select:focus{border-color:var(--itxt)}
+.btn{padding:8px 16px;font-size:13px;border:.5px solid var(--bdr2);border-radius:var(--r);background:none;color:var(--t1);cursor:pointer}
+.btn:hover{background:var(--bg2)}
+.bp{background:var(--t1);color:var(--bg1);border-color:var(--t1)}
+.bp:hover{opacity:.85}
+.bs{padding:5px 12px;font-size:12px}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500}
+.bg{background:var(--sbg);color:var(--stxt)}
+.bb{background:var(--ibg);color:var(--itxt)}
+.ba{background:var(--wbg);color:var(--wtxt)}
+.bgr{background:var(--bg3);color:var(--t2)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:.5px solid var(--bdr);font-size:13px}
+.row:last-child{border-bottom:none}
+h3{font-size:15px;font-weight:500;margin-bottom:12px}
+h4{font-size:13px;font-weight:500;margin-bottom:8px;color:var(--t2)}
+.av{width:36px;height:36px;border-radius:50%;background:var(--ibg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--itxt);flex-shrink:0}
+.pb{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:4px}
+.pf{height:100%;border-radius:3px;background:var(--stxt)}
+.tag{font-size:11px;background:var(--bg2);color:var(--t2);padding:2px 7px;border-radius:4px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.ff{margin-bottom:10px}
+.alert{padding:10px 14px;border-radius:var(--r);font-size:13px;margin-bottom:10px}
+.as{background:var(--sbg);color:var(--stxt)}
+.ai{background:var(--ibg);color:var(--itxt)}
+.cl{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:200px;overflow-y:auto;margin:8px 0}
+.ci{display:flex;align-items:center;gap:6px;font-size:13px;padding:3px 0}
+.ci input[type=checkbox]{width:auto}
+.empty{text-align:center;padding:24px 16px;color:var(--t3);font-size:13px}
+.fx{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.note{font-size:12px;color:var(--t3);margin-top:8px}
+.cert{border:2px solid #E8B85A;border-radius:8px;padding:20px;text-align:center;background:#FFFDF5;color:#2C2C2A;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="hdr">
+  <div><div class="hdr-t">Движение Первых</div><div class="hdr-s">Орловское региональное отделение · Волонтёрский дневник</div></div>
+  <span class="badge bg">● Локальная версия</span>
+</div>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('dashboard',this)">Обзор</button>
+  <button class="tab" onclick="showTab('participants',this)">Участники</button>
+  <button class="tab" onclick="showTab('events',this)">Мероприятия</button>
+  <button class="tab" onclick="showTab('certs',this)">Сертификаты</button>
+  <button class="tab" onclick="showTab('path',this)">Путь</button>
+</div>
+
+<div id="tab-dashboard" class="panel active">
+  <div class="g3" style="margin-bottom:12px">
+    <div class="metric"><div class="mn" id="m-p">0</div><div class="ml">Участников</div></div>
+    <div class="metric"><div class="mn" id="m-e">0</div><div class="ml">Мероприятий</div></div>
+    <div class="metric"><div class="mn" id="m-c">0</div><div class="ml">Сертификатов</div></div>
+  </div>
+  <div class="card"><h3>Последние мероприятия</h3><div id="d-events"><div class="empty">Нет данных</div></div></div>
+  <div class="card"><h3>Топ участников</h3><div id="d-top"><div class="empty">Нет данных</div></div></div>
+  <div class="card">
+    <h4>Действия</h4>
+    <div class="fx">
+      <button class="btn bs" onclick="showTab('participants',null);setTimeout(openAddP,100)">+ Участник</button>
+      <button class="btn bs" onclick="showTab('events',null);setTimeout(openAddE,100)">+ Мероприятие</button>
+      <button class="btn bs" onclick="showTab('certs',null)">Сертификат</button>
+      <button class="btn bs" onclick="loadDemo()">Загрузить демо</button>
+      <button class="btn bs" onclick="exportData()">💾 Экспорт JSON</button>
+      <button class="btn bs" onclick="document.getElementById('imp').click()">📂 Импорт JSON</button>
+      <input type="file" id="imp" accept=".json" style="display:none" onchange="importData(this)">
+    </div>
+    <div class="note">Данные сохраняются в браузере автоматически. Экспорт/импорт JSON — для переноса на другое устройство или резервной копии.</div>
+  </div>
+</div>
+
+<div id="tab-participants" class="panel">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h3 style="margin:0">Участники</h3>
+    <button class="btn bp bs" onclick="openAddP()">+ Добавить</button>
+  </div>
+  <div id="al-p"></div>
+  <div id="form-p" style="display:none" class="card">
+    <h4>Новый участник</h4>
+    <div class="fr"><div><label>Фамилия</label><input id="p-s" placeholder="Иванов"/></div><div><label>Имя</label><input id="p-n" placeholder="Иван"/></div></div>
+    <div class="fr"><div><label>Дата рождения</label><input id="p-d" type="date"/></div><div><label>Школа</label><input id="p-sc" placeholder="МБОУ СОШ №15"/></div></div>
+    <div class="fr"><div><label>Класс</label><input id="p-g" placeholder="10А"/></div><div><label>Тел. куратора</label><input id="p-ph" placeholder="+7..."/></div></div>
+    <div class="fx" style="margin-top:8px">
+      <button class="btn bp bs" onclick="addP()">Сохранить</button>
+      <button class="btn bs" onclick="document.getElementById('form-p').style.display='none'">Отмена</button>
+    </div>
+  </div>
+  <div id="list-p"></div>
+</div>
+
+<div id="tab-events" class="panel">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h3 style="margin:0">Мероприятия</h3>
+    <button class="btn bp bs" onclick="openAddE()">+ Создать</button>
+  </div>
+  <div id="al-e"></div>
+  <div id="form-e" style="display:none" class="card">
+    <h4>Новое мероприятие</h4>
+    <div class="ff"><label>Название</label><input id="e-n" placeholder="Акция «Чистый город»"/></div>
+    <div class="fr"><div><label>Дата</label><input id="e-d" type="date"/></div><div><label>Тип</label><select id="e-t"><option value="экология">Экология</option><option value="патриотизм">Патриотизм</option><option value="образование">Образование</option><option value="творчество">Творчество</option><option value="спорт">Спорт и ЗОЖ</option><option value="волонтёрство">Волонтёрство</option></select></div></div>
+    <div class="fr"><div><label>Место</label><input id="e-pl" placeholder="Орёл, парк Победы"/></div><div><label>Часов</label><input id="e-h" type="number" value="4" min="1"/></div></div>
+    <div class="fx" style="margin-top:8px">
+      <button class="btn bp bs" onclick="addE()">Сохранить</button>
+      <button class="btn bs" onclick="document.getElementById('form-e').style.display='none'">Отмена</button>
+    </div>
+  </div>
+  <div id="list-e"></div>
+  <div id="att-modal" style="display:none" class="card">
+    <h4>Отметить явку: <span id="att-name"></span></h4>
+    <div id="att-cl" class="cl"></div>
+    <div class="fx" style="margin-top:10px">
+      <button class="btn bp bs" onclick="saveAtt()">Сохранить</button>
+      <button class="btn bs" onclick="document.getElementById('att-modal').style.display='none'">Отмена</button>
+    </div>
+  </div>
+</div>
+
+<div id="tab-certs" class="panel">
+  <h3>Выдача сертификатов</h3>
+  <div class="card">
+    <div class="fr">
+      <div><label>Участник</label><select id="cp-sel" onchange="certPreview()"><option value="">— выбрать —</option></select></div>
+      <div><label>Тип</label><select id="ct-sel" onchange="certPreview()"><option value="волонтёр">Волонтёр Движения Первых</option><option value="активист">Активист года</option><option value="лидер">Лидер направления</option><option value="вуз">Для поступления в вуз</option></select></div>
+    </div>
+    <div id="cert-info" style="font-size:13px;color:var(--t2);margin-bottom:10px"></div>
+    <button class="btn bp bs" onclick="issueCert()">Выдать сертификат</button>
+  </div>
+  <div id="cert-prev"></div>
+  <div id="al-c"></div>
+  <h3 style="margin-top:16px">Выданные сертификаты</h3>
+  <div id="list-c"></div>
+</div>
+
+<div id="tab-path" class="panel">
+  <h3>Путь участника</h3>
+  <div class="ff"><label>Выберите участника</label><select id="pp-sel" onchange="renderPath()"><option value="">— выбрать —</option></select></div>
+  <div id="path-content"></div>
+</div>
+</div>
+
+<script>
+const SK='dvp_orel_db';
+let db={participants:[],events:[],attendance:{},certificates:[]};
+let attEid=null;
+
+function load(){try{const s=localStorage.getItem(SK);if(s)db=JSON.parse(s)}catch(e){}}
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).substr(2,4)}
+function ini(s,n){return(s?s[0]:'')+(n?n[0]:'')}
+function tc(t){return{экология:'bg',патриотизм:'bb',образование:'bb',творчество:'ba',спорт:'bg',волонтёрство:'bgr'}[t]||'bgr'}
+function hrs(pid){let h=0;for(const eid in db.attendance){if(db.attendance[eid].includes(pid)){const ev=db.events.find(e=>e.id===eid);if(ev)h+=ev.hours}}return h}
+function evc(pid){let c=0;for(const eid in db.attendance)if(db.attendance[eid].includes(pid))c++;return c}
+function lvl(h){if(h>=50)return{l:'Лидер',c:'ba'};if(h>=20)return{l:'Активист',c:'bb'};if(h>=5)return{l:'Участник',c:'bg'};return{l:'Новичок',c:'bgr'}}
+
+function showTab(t,btn){
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(el=>el.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  else document.querySelectorAll('.tab').forEach(el=>{if((el.getAttribute('onclick')||'').includes("'"+t+"'"))el.classList.add('active')});
+  document.getElementById('tab-'+t).classList.add('active');
+  refresh();
+}
+
+function openAddP(){document.getElementById('form-p').style.display='block'}
+function openAddE(){document.getElementById('form-e').style.display='block'}
+
+function addP(){
+  const s=document.getElementById('p-s').value.trim();
+  const n=document.getElementById('p-n').value.trim();
+  if(!s||!n){al('al-p','Укажите фамилию и имя','i');return}
+  db.participants.push({id:uid(),surname:s,name:n,dob:document.getElementById('p-d').value,school:document.getElementById('p-sc').value,grade:document.getElementById('p-g').value,phone:document.getElementById('p-ph').value,joined:new Date().toISOString().slice(0,10)});
+  document.getElementById('form-p').style.display='none';
+  ['p-s','p-n','p-d','p-sc','p-g','p-ph'].forEach(id=>document.getElementById(id).value='');
+  al('al-p','Участник '+s+' '+n+' добавлен','s');
+  save();refresh();
+}
+
+function addE(){
+  const n=document.getElementById('e-n').value.trim();
+  if(!n){al('al-e','Укажите название','i');return}
+  const e={id:uid(),name:n,date:document.getElementById('e-d').value||new Date().toISOString().slice(0,10),type:document.getElementById('e-t').value,place:document.getElementById('e-pl').value,hours:parseInt(document.getElementById('e-h').value)||4};
+  db.events.push(e);db.attendance[e.id]=[];
+  document.getElementById('form-e').style.display='none';
+  ['e-n','e-pl'].forEach(id=>document.getElementById(id).value='');
+  al('al-e','Мероприятие «'+n+'» создано','s');
+  save();refresh();
+}
+
+function openAtt(eid){
+  attEid=eid;
+  const ev=db.events.find(e=>e.id===eid);
+  document.getElementById('att-name').textContent=ev.name;
+  const cur=db.attendance[eid]||[];
+  const cl=document.getElementById('att-cl');
+  cl.innerHTML='';
+  if(!db.participants.length){cl.innerHTML='<div class="empty">Нет участников</div>';return}
+  db.participants.forEach(p=>{
+    const d=document.createElement('div');d.className='ci';
+    d.innerHTML='<input type="checkbox" id="at-'+p.id+'" value="'+p.id+'" '+(cur.includes(p.id)?'checked':'')+'><label for="at-'+p.id+'">'+p.surname+' '+p.name+'</label>';
+    cl.appendChild(d);
+  });
+  document.getElementById('att-modal').style.display='block';
+}
+
+function saveAtt(){
+  if(!attEid)return;
+  db.attendance[attEid]=[...document.querySelectorAll('#att-cl input:checked')].map(i=>i.value);
+  document.getElementById('att-modal').style.display='none';
+  al('al-e','Явка сохранена','s');save();refresh();
+}
+
+function issueCert(){
+  const pid=document.getElementById('cp-sel').value;
+  const ct=document.getElementById('ct-sel').value;
+  if(!pid){al('al-c','Выберите участника','i');return}
+  const p=db.participants.find(x=>x.id===pid);
+  if(evc(pid)<1){al('al-c','Участник ещё не посещал мероприятий','i');return}
+  if(db.certificates.find(c=>c.pid===pid&&c.type===ct)){al('al-c','Такой сертификат уже выдан','i');return}
+  db.certificates.push({id:uid(),pid,type:ct,name:p.surname+' '+p.name,events:evc(pid),hours:hrs(pid),issued:new Date().toISOString().slice(0,10),number:'ОРЛ-'+new Date().getFullYear()+'-'+String(db.certificates.length+1).padStart(3,'0')});
+  al('al-c','Сертификат выдан!','s');save();refresh();
+}
+
+function certPreview(){
+  const pid=document.getElementById('cp-sel').value;
+  const ct=document.getElementById('ct-sel').value;
+  const w=document.getElementById('cert-prev');
+  const inf=document.getElementById('cert-info');
+  if(!pid){w.innerHTML='';inf.innerHTML='';return}
+  const p=db.participants.find(x=>x.id===pid);
+  const h=hrs(pid),ev=evc(pid),lv=lvl(h);
+  inf.innerHTML='Участий: <b>'+ev+'</b> &nbsp;·&nbsp; Часов: <b>'+h+'</b> &nbsp;·&nbsp; Уровень: <span class="badge '+lv.c+'">'+lv.l+'</span>';
+  const num='ОРЛ-'+new Date().getFullYear()+'-'+String(db.certificates.length+1).padStart(3,'0');
+  const tl={волонтёр:'ВОЛОНТЁРА ДВИЖЕНИЯ ПЕРВЫХ',активист:'АКТИВИСТА ГОДА',лидер:'ЛИДЕРА НАПРАВЛЕНИЯ',вуз:'ДЛЯ ПОСТУПЛЕНИЯ В ВУЗ'};
+  w.innerHTML='<div class="cert"><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7B4F0F">Всероссийское движение детей и молодёжи</div><div style="font-size:17px;font-weight:500;color:#7B4F0F;margin:8px 0 4px">СЕРТИФИКАТ '+(tl[ct]||'')+'</div><div style="font-size:11px;color:#888;margin-bottom:12px">Орловское региональное отделение</div><div style="font-size:22px;font-weight:500;color:#1a1a18;margin:12px 0 4px">'+p.surname+' '+p.name+'</div><div style="font-size:12px;color:#5F5E5A">'+(p.school||'')+(p.grade?' · '+p.grade:'')+'</div><div style="margin:14px 0;font-size:13px;color:#3d3d3a">принял(а) участие в <b>'+ev+'</b> мероприятии(ях)<br>суммарно <b>'+h+'</b> волонтёрских часов &nbsp;·&nbsp; уровень: <b>'+lv.l+'</b></div><div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:16px;font-size:11px;color:#888;border-top:.5px solid #E8B85A;padding-top:10px"><div style="width:48px;height:48px;border-radius:50%;border:2px solid #E8B85A;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;color:#7B4F0F;text-align:center;line-height:1.2">ДП<br>ОРЛ</div><div style="text-align:right"><div>№ '+num+'</div><div>'+new Date().toLocaleDateString('ru')+'</div><div style="margin-top:4px;font-size:10px">Куратор регионального отделения</div><div style="border-top:.5px solid #ccc;margin-top:18px;padding-top:4px;font-size:10px;color:#aaa">подпись / печать</div></div></div></div>';
+}
+
+function renderPath(){
+  const pid=document.getElementById('pp-sel').value;
+  const cont=document.getElementById('path-content');
+  if(!pid){cont.innerHTML='';return}
+  const p=db.participants.find(x=>x.id===pid);
+  const h=hrs(pid),ev=evc(pid),lv=lvl(h);
+  const certs=db.certificates.filter(c=>c.pid===pid);
+  const myEv=db.events.filter(e=>db.attendance[e.id]&&db.attendance[e.id].includes(pid)).sort((a,b)=>a.date.localeCompare(b.date));
+  const prog=Math.min(100,Math.round(h/50*100));
+  cont.innerHTML='<div class="card"><div class="fx" style="margin-bottom:14px"><div class="av" style="width:48px;height:48px;font-size:16px">'+ini(p.surname,p.name)+'</div><div><div style="font-size:15px;font-weight:500">'+p.surname+' '+p.name+'</div><div style="font-size:12px;color:var(--t2)">'+(p.school||'')+(p.grade?' · '+p.grade:'')+'</div><span class="badge '+lv.c+'" style="margin-top:4px">'+lv.l+'</span></div></div><div class="g2" style="margin-bottom:12px"><div class="metric"><div class="mn">'+ev+'</div><div class="ml">мероприятий</div></div><div class="metric"><div class="mn">'+h+'</div><div class="ml">часов</div></div></div><div style="font-size:12px;color:var(--t2);display:flex;justify-content:space-between;margin-bottom:3px"><span>До уровня «Лидер» (50 ч)</span><span>'+h+'/50</span></div><div class="pb"><div class="pf" style="width:'+prog+'%"></div></div></div><div class="card"><h3>История мероприятий</h3>'+(myEv.length?myEv.map(e=>'<div class="row"><div><div style="font-size:13px;font-weight:500">'+e.name+'</div><div style="font-size:11px;color:var(--t2)">'+e.date+' · '+(e.place||'Орёл')+'</div></div><div class="fx"><span class="badge '+tc(e.type)+'">'+e.type+'</span><span class="tag">'+e.hours+'ч</span></div></div>').join(''):'<div class="empty">Нет мероприятий</div>')+'</div>'+(certs.length?'<div class="card"><h3>Сертификаты</h3>'+certs.map(c=>'<div class="row"><span>'+(c.type==='вуз'?'Для поступления в вуз':c.type)+'</span><span style="font-size:11px;color:var(--t2)">№'+c.number+' · '+c.issued+'</span></div>').join('')+'</div>':'')+(h>=20?'<div class="alert as">✓ Достаточно часов для сертификата в вуз (от 20 часов)</div>':'<div class="alert ai">До сертификата в вуз: ещё '+(20-h)+' ч (минимум 20 часов)</div>');
+}
+
+function al(id,msg,type){
+  const el=document.getElementById(id);if(!el)return;
+  const cls=type==='s'?'as':'ai';
+  el.innerHTML='<div class="alert '+cls+'">'+msg+'</div>';
+  setTimeout(()=>{if(el)el.innerHTML=''},3000);
+}
+
+function exportData(){
+  const b=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download='dvp_orel_'+new Date().toISOString().slice(0,10)+'.json';a.click();
+}
+function importData(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{try{db=JSON.parse(e.target.result);save();refresh();al('al-p','Данные импортированы','s')}catch(err){alert('Ошибка чтения файла')}};
+  r.readAsText(f);inp.value='';
+}
+
+function refresh(){
+  document.getElementById('m-p').textContent=db.participants.length;
+  document.getElementById('m-e').textContent=db.events.length;
+  document.getElementById('m-c').textContent=db.certificates.length;
+
+  const rec=[...db.events].slice(-3).reverse();
+  document.getElementById('d-events').innerHTML=rec.length?rec.map(ev=>{
+    const cnt=(db.attendance[ev.id]||[]).length;
+    return '<div class="row"><div><div style="font-size:13px;font-weight:500">'+ev.name+'</div><div style="font-size:11px;color:var(--t2)">'+ev.date+' · '+(ev.place||'')+'</div></div><div class="fx"><span class="tag">'+cnt+' чел.</span><span class="badge '+tc(ev.type)+'">'+ev.type+'</span></div></div>';
+  }).join(''):'<div class="empty">Нет мероприятий</div>';
+
+  const top=[...db.participants].map(p=>({...p,h:hrs(p.id),ev:evc(p.id)})).sort((a,b)=>b.h-a.h).slice(0,5);
+  document.getElementById('d-top').innerHTML=top.length&&top[0].h>0?top.map(p=>{const l=lvl(p.h);return'<div class="row"><div class="fx"><div class="av">'+ini(p.surname,p.name)+'</div><div><div style="font-size:13px">'+p.surname+' '+p.name+'</div><div style="font-size:11px;color:var(--t2)">'+(p.school||'')+'</div></div></div><div class="fx"><span class="tag">'+p.h+'ч</span><span class="badge '+l.c+'">'+l.l+'</span></div></div>'}).join(''):'<div class="empty">Нет данных об активности</div>';
+
+  document.getElementById('list-p').innerHTML=db.participants.length?db.participants.map(p=>{const h=hrs(p.id),ev=evc(p.id),l=lvl(h);return'<div class="card" style="padding:10px 14px"><div class="fx" style="justify-content:space-between"><div class="fx"><div class="av">'+ini(p.surname,p.name)+'</div><div><div style="font-size:13px;font-weight:500">'+p.surname+' '+p.name+'</div><div style="font-size:11px;color:var(--t2)">'+(p.school||'—')+(p.grade?' · '+p.grade:'')+'</div></div></div><div class="fx"><span class="tag">'+ev+' меропр.</span><span class="tag">'+h+'ч</span><span class="badge '+l.c+'">'+l.l+'</span></div></div></div>'}).join(''):'<div class="empty">Нет участников</div>';
+
+  document.getElementById('list-e').innerHTML=db.events.length?[...db.events].reverse().map(ev=>{const cnt=(db.attendance[ev.id]||[]).length;return'<div class="card" style="padding:10px 14px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div><div style="font-size:13px;font-weight:500">'+ev.name+'</div><div style="font-size:11px;color:var(--t2)">'+ev.date+' · '+(ev.place||'Орёл')+' · '+ev.hours+'ч</div></div><span class="badge '+tc(ev.type)+'">'+ev.type+'</span></div><div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:12px;color:var(--t2)">Участников: <b>'+cnt+'</b></span><button class="btn bs" onclick="openAtt(\''+ev.id+'\')">Отметить явку</button></div></div>'}).join(''):'<div class="empty">Нет мероприятий</div>';
+
+  document.getElementById('list-c').innerHTML=db.certificates.length?[...db.certificates].reverse().map(c=>'<div class="card" style="padding:10px 14px"><div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:13px;font-weight:500">'+c.name+'</div><div style="font-size:11px;color:var(--t2)">№'+c.number+' · '+c.issued+'</div></div><div class="fx"><span class="tag">'+c.hours+'ч</span><span class="badge ba">'+c.type+'</span></div></div></div>').join(''):'<div class="empty">Сертификатов нет</div>';
+
+  ['cp-sel','pp-sel'].forEach(id=>{const sel=document.getElementById(id);const cur=sel.value;sel.innerHTML='<option value="">— выбрать —</option>'+db.participants.map(p=>'<option value="'+p.id+'">'+p.surname+' '+p.name+'</option>').join('');if(cur)sel.value=cur;});
+}
+
+function loadDemo(){
+  db.participants=[
+    {id:'p1',surname:'Смирнова',name:'Анна',dob:'2006-03-14',school:'МБОУ СОШ №15',grade:'10А',phone:'+7 910 000 01',joined:'2024-09-01'},
+    {id:'p2',surname:'Петров',name:'Дмитрий',dob:'2007-07-22',school:'МБОУ Лицей №22',grade:'9Б',phone:'+7 910 000 02',joined:'2024-09-05'},
+    {id:'p3',surname:'Козлова',name:'Мария',dob:'2005-11-03',school:'МБОУ СОШ №8',grade:'11В',phone:'+7 910 000 03',joined:'2024-09-10'},
+    {id:'p4',surname:'Новиков',name:'Артём',dob:'2008-01-18',school:'МБОУ Гимназия №1',grade:'8А',phone:'+7 910 000 04',joined:'2024-10-01'},
+    {id:'p5',surname:'Фёдорова',name:'Юлия',dob:'2006-05-30',school:'МБОУ СОШ №15',grade:'10А',phone:'+7 910 000 05',joined:'2024-10-15'},
+  ];
+  db.events=[
+    {id:'e1',name:'Акция «Чистый город»',date:'2024-10-05',type:'экология',place:'Орёл, парк Победы',hours:4},
+    {id:'e2',name:'День народного единства',date:'2024-11-04',type:'патриотизм',place:'пл. Ленина, Орёл',hours:3},
+    {id:'e3',name:'Ярмарка профессий',date:'2024-11-20',type:'образование',place:'ОГТУ',hours:5},
+    {id:'e4',name:'Новогодний концерт',date:'2024-12-28',type:'творчество',place:'ДК Орёл',hours:6},
+    {id:'e5',name:'Лыжня России — 2025',date:'2025-02-08',type:'спорт',place:'парк Ботаника',hours:4},
+  ];
+  db.attendance={e1:['p1','p2','p3','p5'],e2:['p1','p3','p4'],e3:['p1','p2','p3','p4','p5'],e4:['p2','p3','p5'],e5:['p1','p4','p5']};
+  db.certificates=[{id:'c1',pid:'p1',type:'вуз',name:'Смирнова Анна',events:4,hours:18,issued:'2025-01-15',number:'ОРЛ-2025-001'}];
+  save();refresh();
+}
+
+load();refresh();
+</script>
+</body>
+</html>
